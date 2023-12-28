@@ -1,7 +1,7 @@
 <?php
 
-    $email = $title = $ingredient='';
-    $errors=['email'=>'', 'title'=>'', 'ingredient'=>''];
+    $email = $title = $ingredients='';
+    $errors=['email'=>'', 'title'=>'', 'ingredients'=>''];
 
     if (isset($_POST["submit"])) {
         
@@ -9,10 +9,19 @@
             
             $errors['email'] = "Please enter email";
         }else{
+            $email = $_POST["email"];
             if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = "Please enter a valid email";
-            }else{
-                $email = $_POST["email"];
+            }
+        }
+
+        if (empty($_POST["ingredients"])) {
+            
+            $errors['ingredients'] = "Please enter ingredients";
+        }else{
+            $ingredients = $_POST["ingredients"];
+            if (!preg_match("/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s*])*$/", $_POST["ingredients"])) {
+                $errors['ingredients'] = "Please enter seperate with commas";
             }
         }
 
@@ -20,21 +29,10 @@
             
             $errors['title'] = "Please enter title";
         }else{
-            if (preg_match("/^[a-zA-Z\s]+$/", $_POST["title"])) {
+            $title = $_POST["title"];
+            if (!preg_match("/^[a-zA-Z\s]+$/", $_POST["title"])) {
+                
                 $errors['title'] = "Please enter a valid title";
-            }else{
-                $title = $_POST["title"];
-            }
-        }
-
-        if (empty($_POST["title"])) {
-            
-            $errors['title'] = "Please enter title";
-        }else{
-            if (preg_match("/^[a-zA-Z\s]+$/", $_POST["title"])) {
-                $errors['title'] = "Please enter a valid title";
-            }else{
-                $title = $_POST["title"];
             }
         }
     }
@@ -50,14 +48,14 @@
         <h4 class="center">Add a Pizza</h4>
         <form action="add.php" method="post" class="center">
             <label for="email" class="left">Enter Email</label>
-            <input type="email" name="email" value="<?php echo $email;?>">
+            <input type="text" name="email" value="<?php echo $email;?>">
             <div class="red1"><?php echo $errors['email'];?></div>
             <label for="title" class="left">Pizza Title</label>
             <input type="text" name="title" value="<?php echo $title;?>">
             <div class="red1"><?php echo $errors['title'];?></div>
             <label for="ingredients" class="left">Ingridients (comma seperated)</label>
-            <input type="text" name="ingredients"value="<?php echo $ingredient;?>">
-            <div class="red1"><?php echo $errors['ingredient'];?></div>
+            <input type="text" name="ingredients"value="<?php echo $ingredients;?>">
+            <div class="red1"><?php echo $errors['ingredients'];?></div>
             <div class="center">
                 <input type="submit" name="submit" value="Submit" class="btn brand">
             </div>
