@@ -17,6 +17,11 @@
             margin: 20px auto;
             text-align: left;
         }
+        .red1{
+            color: red;
+            text-align: left;
+            font-size: smaller;
+        }
     </style>
 </head>
 
