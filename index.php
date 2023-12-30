@@ -1,12 +1,6 @@
 <?php
 
-    $conn = mysqli_connect("localhost","Thapson","thap123","pizzas_db");
-
-    // if($conn){
-    //     echo("connection Established");
-    // }else{
-    //     echo("no conection");
-    // }
+    include("config/connection.php");
 
     $sql= "SELECT* FROM pizzas ORDER BY created_at";
     $result = mysqli_query($conn, $sql);
@@ -37,7 +31,18 @@
                                 <?php echo htmlspecialchars($pizza['title']);?>
                             </h5>
                             <div>
-                                <?php echo htmlspecialchars($pizza['ingredients']);?>
+                                <ul>
+                                    <?php 
+                                    foreach(explode(',', $pizza['ingredients']) as $ing): ?>
+
+                                    <li>
+                                        <?php echo $ing;?>
+                                    </li>
+
+                                    <?php endforeach;?>
+                                        
+                                </ul>
+                                
                             </div>
 
                         </div>

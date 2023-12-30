@@ -1,5 +1,7 @@
 <?php
 
+    include("config/connection.php");
+
     $email = $title = $ingredients='';
     $errors=['email'=>'', 'title'=>'', 'ingredients'=>''];
 
@@ -20,7 +22,7 @@
             $errors['ingredients'] = "Please enter ingredients";
         }else{
             $ingredients = $_POST["ingredients"];
-            if (!preg_match("/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s*])*$/", $_POST["ingredients"])) {
+            if (!preg_match('/^([a-zA-Z\s]+)(,\s*[a-zA-Z\s]*)*$/', $_POST["ingredients"])) {
                 $errors['ingredients'] = "Please enter seperate with commas";
             }
         }
@@ -34,6 +36,21 @@
                 
                 $errors['title'] = "Please enter a valid title";
             }
+        }
+
+        if(array_filter($errors)){
+            //show errors
+        }else{
+            //no errors available
+
+            $title= mysqli_real_escape_string($conn, $_POST["title"]);
+            $email= mysqli_real_escape_string($conn, $_POST["email"]);
+            $ingredients = mysqli_real_escape_string($conn, $_POST["ingredients"]);
+
+            $sql="INSERT INTO pizzas(title, email, ingredients) VALUES ('$title', '$email', '$ingredients')";
+            $result = mysqli_query($conn, $sql);
+
+            header("Location: index.php");
         }
     }
 
