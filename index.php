@@ -48,13 +48,16 @@
                         </div>
 
                         <div class="card-action right-align">
-                            <a class="brand-text" href="#">More Info</a>
+                            <a class="brand-text" href="details.php?id=<?php echo $pizza['id']; ?>">More Info</a>
                         </div>
                     </div>
                 </div>
             <?php }?>
         </div>
     </div>
+
+    <br>
+    <hr>
     <?php include('templates/footer.php');?>
     
     </body>

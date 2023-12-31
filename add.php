@@ -79,6 +79,8 @@
         </form>
     </section>
 
+    <br>
+    <hr>
     <?php include('templates/footer.php');?>
     
     </body>
