@@ -2,6 +2,21 @@
 
     include("config/connection.php");
 
+    if (isset($_POST["delete"])) {
+        # code...
+        
+        $id = $_POST["idToDelete"];
+
+        $sql="DELETE FROM pizzas WHERE id=$id";
+        $result = mysqli_query($conn, $sql);
+
+        if($result){
+            header("location: index.php");
+        }else{
+            echo"failed to delete the Pizza";
+        }
+    }
+
     if(isset($_GET["id"])){
         $id = mysqli_real_escape_string($conn,$_GET["id"]);
         
@@ -31,6 +46,15 @@
                 <p><?php echo $pizza['email'];?></p>
                 <p><?php echo $pizza['ingredients'];?></p>
                 <p><?php echo $pizza['created_at'];?></p>
+
+                <div>
+                    <form action="details.php" method="post">
+                        <div class="center">
+                            <input type="hidden" name="idToDelete" value="<?php echo $id;?>">
+                            <input type="submit" name="delete" value="Delete" class="btn brand z-depth-0">
+                        </div>
+                    </form>
+                </div>
             </div>
             
         <?php else:?>

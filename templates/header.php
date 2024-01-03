@@ -3,6 +3,13 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
+        .pizza{
+            width: 100px;
+            margin: 40px auto -30px;
+            display: block;
+            position: relative;
+            top: -30px;
+        }
         .brand{
             background-color: #cbb09c !important;
         }
